@@ -42,7 +42,7 @@ function fill_listview ($listbox,$aduser,$g) {
 }
 
 function fill_listview_fileserver ($listbox,$aduser) {
-    $connection = new-object System.Data.SqlClient.SQLConnection("Data Source=mssqllab\mssqllab01;Integrated Security=False;Initial Catalog=IDM-DB;User ID = srv_ace; Password = lCpJxDLTZUbUnvuVb0W3")
+    $connection = new-object System.Data.SqlClient.SQLConnection("Data Source=mssqllab\mssqllab01;Integrated Security=False;Initial Catalog=IDM-DB;User ID = ; Password = ")
     $sql = "SELECT Root,Path,IdentityReference,FileSystemRights FROM [IDM-DB].[dbo].[ACE] WHERE IdentityReference = 'INTERN\$aduser'"
     $cmd = new-object System.Data.SqlClient.SqlCommand($sql, $connection)
 
