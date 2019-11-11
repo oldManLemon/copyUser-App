@@ -15,8 +15,9 @@
         <Label Content="Name of New User" HorizontalAlignment="Left" Margin="36,165,0,0" VerticalAlignment="Top"/>
         <Label Content="Output" HorizontalAlignment="Left" Margin="425,28,0,0" VerticalAlignment="Top" Width="83"/>
         <Button Content="Copy and Create User" HorizontalAlignment="Left" Margin="36,228,0,0" VerticalAlignment="Top" Width="127" Height="30" Click="copyUserButton"/>
-        <TextBox x:Name="resultsBox" HorizontalAlignment="Left" Height="279" Margin="425,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="287" Background="{x:Null}" IsEnabled="False"/>
-        
+
+        <TextBox x:Name="resultsBox" HorizontalAlignment="Left" Height="279" Margin="425,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="287" Background="{x:Null}" IsReadOnly="True" IsEnabled="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" />
+       
 
     </Grid>
 </Window>

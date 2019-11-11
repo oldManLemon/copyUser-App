@@ -1,7 +1,12 @@
 #Turn into params
 # $usrToCopy = Read-Host -Prompt 'Please enter the user you wish to copy here'
 $usrToCopy = $args[0] #Probs should make this safer by being more verbose but for now testing
+#write-output $usrToCopy
 $firstName, $lastName = $usrToCopy.Split(' ')
+#Write-Output "User Name" $usrToCopy
+#Write-Output "First Name" $firstName
+#Write-Output "Last Name" $lastName
+
 $defaultPassword = ConvertTo-SecureString -String "Start#2019" -AsPlainText -Force
 $filterForAdSearch = "givenName -like ""*$firstName*"" -and sn -like ""$lastName"""
 
@@ -10,10 +15,13 @@ $user = try {
     Write-Host 'User' $usrToCopy 'will now be your template'
 }
 catch {
-    Write-Host "Please check again, user is not found. 'n Is this user in Stuttgart?"
+    Write-Output "Please check again, user is not found. Is this user in Stuttgart?"
+	 Write-Output "Username was: " $usrToCopy $fristName $lastName
+	 Write-Output $_.Exception.Message 
+	break
 }
 if ($user -is [array] ) {
-    Write-Host 'There is has being an err, your selected user to copy has showed up more than once, it is an array not an obj. Breaking'
+    Write-Output 'There is has being an err, your selected user to copy has showed up more than once, it is an array not an obj. Breaking'
     break
 }
 $userInstance = Get-ADUser -Identity $user.SamAccountName
@@ -26,7 +34,7 @@ function checkUsrSam {
         Get-ADUser -Identity $samName
     }
     catch {
-        write-host 'UserName Generated'
+        write-Host 'UserName Generated'
     }
        
     if ($checkSam) {
@@ -44,10 +52,13 @@ function checkUsrSam {
 }
 
 IF ($user) {
-    Write-Host 'User Found to be copied'
+    Write-Output 'User Found to be copied'
     # $newUsr = Read-Host -Prompt 'Enter name of new user'
     $newUsr = $args[1]
+	#$newUsr = $newUsr.Trim('"')
     $newFirstName, $newLastName = $newUsr.Split()
+	#Write-Output "User Name" $usrToCopy
+
 
     #Flip the user names to match all other users
     $newUsr = $newLastName + ', ' + $newFirstName
@@ -84,8 +95,10 @@ IF ($user) {
     #Create New User --This is really long and i want to multiline it or place it in a var but it hasn't gone well
     try{
         New-ADUser -Name $newUsr -SamAccountName $newSamAccountName -Instance $userInstance -DisplayName $displayName -GivenName $newFirstName -Surname $newLastName -AccountPassword $defaultPassword -Enabled $enabled -ChangePasswordAtLogon $true -UserPrincipalName $newUsrPrincipalName -Path $newPath
+		Write-Output 'Completed Successfully' $newUsr " is now completed"
     }catch{
-        Write-Host "Couldn't create user, most likely permission error"
+        Write-Output "Couldn't create user, most likely permission error"
+		Write-Output $_.Exception.Message 
         break
     }
     
@@ -99,10 +112,12 @@ IF ($user) {
     
     #Add some properties to the new user
     Set-ADuser -Identity $newSamAccountName -Description $user.Description -Department $user.Department -Country $user.Country -City $user.City -State $user.State -Title $user.Title
-
+	Write-Output "Success"
+	
 }
 else {
-    Write-Host 'Please check, user is not found is this user in Stuttgart?'
-    Write-Host 'Bitte überprüfen, Benutuzer nicht gefundet, ist dieser Benutzer in Stuttgart?'
+    Write-Output 'Please check, user is not found is this user in Stuttgart?'
+	
+    Write-Output 'Bitte überprüfen, Benutuzer nicht gefundet, ist dieser Benutzer in Stuttgart?'
 }
 
