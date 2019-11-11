@@ -88,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="compareGroupMemberships.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="copyUsr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +103,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="compareGroupMemberships.xaml.cs">
+      <DependentUpon>compareGroupMemberships.xaml</DependentUpon>
     </Compile>
     <Compile Include="copyUsr.xaml.cs">
       <DependentUpon>copyUsr.xaml</DependentUpon>
@@ -133,6 +140,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="scritps\compareadaccounts.ps1" />
     <None Include="scritps\copyUsrCli.ps1" />
   </ItemGroup>
   <ItemGroup>

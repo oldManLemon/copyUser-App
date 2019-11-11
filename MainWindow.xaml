@@ -8,6 +8,7 @@
         Title="PowerShell Scripts" Height="450" Width="800">
     <Grid>
         <Button Content="Copy User" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Click="Button_Click" Margin="43,67,0,0" Height="43"/>
+        <Button Content="AD Group Management" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Click="adGroupManagement" Margin="183,67,0,0" Height="43"/>
 
     </Grid>
 </Window>

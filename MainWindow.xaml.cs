@@ -30,5 +30,10 @@ namespace poshScripts
             copyUsr copyUsrWindow = new copyUsr();
             copyUsrWindow.Show();
         }
+        private void adGroupManagement(object sender, RoutedEventArgs e)
+        {
+            compareGroupMemberships compareWindow = new compareGroupMemberships();
+            compareWindow.Show();
+        }
     }
 }
