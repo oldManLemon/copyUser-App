@@ -42,6 +42,29 @@ namespace poshScripts
         private void loadLeft_Click(object sender, RoutedEventArgs e)
         {
             var leftUser = UsrLeft.Text;
+            //Initialise Powershell
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+            var shell = PowerShell.Create(iss);
+            var script = "C:\\Users\\ahase\\source\\repos\\poshScripts\\scritps\\getUsrGroup.ps1";
+            shell.Commands.AddCommand(script);
+            shell.Commands.AddArgument(leftUser);
+            shell.Commands.AddArgument(server);
+            try
+            {
+                var res = shell.Invoke();
+                if (res.Count > 0)
+                {
+                    var builder = new StringBuilder();
+                    foreach (var psObject in res)
+                    {
+                        builder.Append(psObject.BaseObject.ToString() + "\r\n");
+                    }
+                    GroupListLeft.Items.Add(builder.ToString());
+                }
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
         
 
@@ -64,20 +87,20 @@ namespace poshScripts
                 //resultsBox.Text += res.Count;
                 //resultsBox.Text += res.ToString();
                 // resultsBox.Text += "\n";
-                if (res.Count > 0)
-                {
-                    var builder = new StringBuilder();
-                    foreach (var psObject in res)
-                    {
-                        try
-                        {
-                            builder.Append(psObject.BaseObject.ToString() + "\r\n");
-                        }
-                        catch { builder.Append("ObjNull\r\n"); }
-                    }
+                //if (res.Count > 0)
+                //{
+                //    var builder = new StringBuilder();
+                //    foreach (var psObject in res)
+                //    {
+                //        try
+                //        {
+                //            builder.Append(psObject.BaseObject.ToString() + "\r\n");
+                //        }
+                //        catch { builder.Append("ObjNull\r\n"); }
+                //    }
                 
-                    GroupListLeft.Items.Add(builder.ToString());
-                }
+                //    GroupListLeft.Items.Add(builder.ToString());
+                //}
 
             }
             catch (Exception Err)

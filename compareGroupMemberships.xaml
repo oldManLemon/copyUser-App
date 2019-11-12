@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Compare Group Memberships" Height="650" Width="900">
     <Grid>
-        <TextBox x:Name="UsrLeft" HorizontalAlignment="Left" Height="23" Margin="75,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661" TextChanged="UsrLeft_TextChanged"/>
+        <TextBox x:Name="UsrLeft" HorizontalAlignment="Left" Height="23" Margin="75,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <TextBox x:Name="UsrRight" HorizontalAlignment="Left" Height="23" Margin="525,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <ListBox x:Name="GroupListLeft" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300"/>
         <ListBox x:Name="GroupListRight" HorizontalAlignment="Left" Height="460" Margin="525,121,0,0" VerticalAlignment="Top" Width="300"/>

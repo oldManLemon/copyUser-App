@@ -141,6 +141,7 @@
     </None>
     <None Include="scritps\compareadaccounts.ps1" />
     <None Include="scritps\copyUsrCli.ps1" />
+    <None Include="scritps\getUsrGroup.ps1" />
     <None Include="scritps\getUsrLists.ps1" />
   </ItemGroup>
   <ItemGroup>
