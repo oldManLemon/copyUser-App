@@ -7,13 +7,20 @@
         mc:Ignorable="d"
         Title="Compare Group Memberships" Height="650" Width="900">
     <Grid>
-        <TextBox x:Name="UsrLeft" HorizontalAlignment="Left" Height="23" Margin="75,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
+        <TextBox x:Name="UsrLeft" HorizontalAlignment="Left" Height="23" Margin="75,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661" TextChanged="UsrLeft_TextChanged"/>
         <TextBox x:Name="UsrRight" HorizontalAlignment="Left" Height="23" Margin="525,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <ListBox x:Name="GroupListLeft" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300"/>
         <ListBox x:Name="GroupListRight" HorizontalAlignment="Left" Height="460" Margin="525,121,0,0" VerticalAlignment="Top" Width="300"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="460" Margin="400,121,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="TotalLeft" Content="TotalLeft:{int}" HorizontalAlignment="Left" Height="28" Margin="75,581,0,0" VerticalAlignment="Top" Width="103"/>
         <Label x:Name="TotalRight" Content="TotalRight:{int}" HorizontalAlignment="Left" Height="28" Margin="525,581,0,0" VerticalAlignment="Top" Width="118"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="28" Margin="75,10,0,0" VerticalAlignment="Top" Width="750"/>
+        <RadioButton x:Name="intern" Content="Intern" HorizontalAlignment="Left" Margin="93,16,0,0" VerticalAlignment="Top" Checked="domain_Check" IsChecked="True" GroupName="site"/>
+        <RadioButton x:Name="str" Content="Stuttgart" HorizontalAlignment="Left" Margin="257,16,0,0" VerticalAlignment="Top"  Checked="domain_Check" GroupName="site"/>
+        <RadioButton x:Name="eg" Content="EuroGround" HorizontalAlignment="Left" Margin="443,16,0,0" VerticalAlignment="Top"  Checked="domain_Check" GroupName="site"/>
+        <Button x:Name="loadLeft" Content="Load" HorizontalAlignment="Left" Margin="300,83,0,0" VerticalAlignment="Top" Width="75" Click="loadLeft_Click"/>
+        <Button x:Name="loadRight" Content="Load" HorizontalAlignment="Left" Margin="750,83,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Reload Users" HorizontalAlignment="Left" Margin="411,58,0,0" VerticalAlignment="Top" Width="75" Click="reloadUsers"/>
 
     </Grid>
 </Window>
