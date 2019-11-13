@@ -11,7 +11,7 @@
         <TextBox x:Name="UsrRight" HorizontalAlignment="Left" Height="23" Margin="525,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <Label Content="Username" HorizontalAlignment="Left" Margin="75,80,0,0" VerticalAlignment="Top"/>
         <Label Content="Username" HorizontalAlignment="Left" Margin="525,80,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="GroupListLeft" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300"/>
+        <ListBox SelectionMode="Multiple" x:Name="GroupListLeft" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300"/>
         <ListBox x:Name="GroupListRight" HorizontalAlignment="Left" Height="460" Margin="525,121,0,0" VerticalAlignment="Top" Width="300"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="460" Margin="400,121,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="TotalLeft" Content="" HorizontalAlignment="Left" Height="28" Margin="75,581,0,0" VerticalAlignment="Top" Width="103"/>

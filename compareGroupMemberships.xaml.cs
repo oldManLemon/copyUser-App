@@ -38,29 +38,64 @@ namespace poshScripts
             {
                 server = check.Name;
             }
-            
+
         }
 
-     
+        //Roll through the CSV
+        public static string[] readCSV(string cvsServer)
+        {
+            string[] a = { "string" };
+            var endPath = "\\aviovaManagementApp\\usrData\\" + cvsServer + ".csv";
+            var path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + endPath);
+            //using (TextFieldParser parser = new TextFieldParser(@path))
+            //{
+            //    parser.TextFieldType = FieldType.Delimited;
+            //    parser.SetDelimiters(",");
+            //    while (!parser.EndOfData)
+            //    {
+            //        //Processing row
+            //        string[] fields = parser.ReadFields();
+
+            //        foreach (string field in fields)
+            //        {
+            //            Console.WriteLine(field);
+                        
+            //        }
+                    
+            //    }
+            //}
+
+
+
+            return a;
+        }
+
 
         private void loadLeft_Click(object sender, RoutedEventArgs e)
 
         {
-            var path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"\\aviovaManagementApp\\usrData\\"+server+".csv");
+            readCSV(server);
+
             var leftUser = UsrLeft.Text;
-            DataTable dt = new DataTable();
-            using(TextFieldParser parser = new TextFieldParser(path))
+            if (leftUser == "")
             {
-                // set the parser variables
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
+                MessageBox.Show("No User Entered");
+                return;
             }
+            //DataTable dt = new DataTable();
+            //using(TextFieldParser parser = new TextFieldParser(path))
+            //{
+            //    // set the parser variables
+            //    parser.TextFieldType = FieldType.Delimited;
+            //    parser.SetDelimiters(",");
+            //}
             //using(CsvReader csv = new CsvReader(
             //    new StreamReader(path), true))
             //{
             //    csv.ToLookup("ahase");
             //}
             //Initialise Powershell
+
             InitialSessionState iss = InitialSessionState.CreateDefault2();
             var shell = PowerShell.Create(iss);
             var script = "C:\\Users\\ahase\\source\\repos\\poshScripts\\scritps\\getUsrGroup.ps1";
@@ -80,7 +115,7 @@ namespace poshScripts
                 }
                 TotalLeft.Content = res.Count;
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message);
             }
