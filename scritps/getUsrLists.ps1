@@ -20,4 +20,4 @@ if(!$testPath){
     New-Item -Path $appDataLocation -Name "usrData" -ItemType "directory"
 }
 #Get CSV with Full Display Names and account names
-Get-ADUser -Server $server -Filter '*' -Properties DisplayName, Samaccountname | select DisplayName, Samaccountname | Export-Csv $userDataLocation$server".csv"
+Get-ADUser -Server $server -Filter '*' -Properties DisplayName, Samaccountname | select DisplayName , Samaccountname | Export-Csv $userDataLocation$server".csv"

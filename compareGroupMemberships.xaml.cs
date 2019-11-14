@@ -29,8 +29,17 @@ namespace poshScripts
         public compareGroupMemberships()
         {
             InitializeComponent();
+            //List<String> userNameList = readCSV(server);
+            //userNameList.ForEach(i => Console.WriteLine("{0}\t", i));
+            List<String> userNameList = new List<String> { "ahase","thase","welcome","whoknows"};
+            userLeftLoaded = false;
+            userRightLoaded = false;
         }
         string server { get; set; }
+
+        bool userLeftLoaded { get; set; }
+        bool userRightLoaded { get; set; }
+        
         public void domain_Check(object sender, RoutedEventArgs e)
         {
             RadioButton check = sender as RadioButton;
@@ -40,41 +49,52 @@ namespace poshScripts
             }
 
         }
+        public void bothUsersLoaded()
+        {
+            if(userLeftLoaded && userRightLoaded)
+            {
+                TransLR.Visibility = 0; 
+                TransRL.Visibility = 0; 
+                Compare.Visibility = 0;
+                Console.WriteLine("Do Stuf Now");
+            }
+            else
+            {
+                //TransLR.Visibility = 1;
+                //TransRL.Visibility = 1;
+                //Compare.Visibility = 1;
+            }
+        }
 
         //Roll through the CSV
-        public static string[] readCSV(string cvsServer)
+        public static List<String> readCSV(string cvsServer)
         {
+            Console.WriteLine("I am started°");
             string[] a = { "string" };
             var endPath = "\\aviovaManagementApp\\usrData\\" + cvsServer + ".csv";
             var path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + endPath);
-            //using (TextFieldParser parser = new TextFieldParser(@path))
-            //{
-            //    parser.TextFieldType = FieldType.Delimited;
-            //    parser.SetDelimiters(",");
-            //    while (!parser.EndOfData)
-            //    {
-            //        //Processing row
-            //        string[] fields = parser.ReadFields();
+            List<string> listOfUserNames = new List<string>();
+            using (TextFieldParser parser = new TextFieldParser(@path))
+            {
 
-            //        foreach (string field in fields)
-            //        {
-            //            Console.WriteLine(field);
-                        
-            //        }
-                    
-            //    }
-            //}
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters("\",");
+                parser.HasFieldsEnclosedInQuotes = false;
 
+                while (!parser.EndOfData)
+                {
+                    //Processing row
+                    string[] fields = parser.ReadFields();
+                    listOfUserNames.Add(fields[0]);
+                }
+            }return listOfUserNames;
 
-
-            return a;
         }
 
 
-        private void loadLeft_Click(object sender, RoutedEventArgs e)
 
+        private void loadLeft_Click(object sender, RoutedEventArgs e)
         {
-            readCSV(server);
 
             var leftUser = UsrLeft.Text;
             if (leftUser == "")
@@ -82,19 +102,7 @@ namespace poshScripts
                 MessageBox.Show("No User Entered");
                 return;
             }
-            //DataTable dt = new DataTable();
-            //using(TextFieldParser parser = new TextFieldParser(path))
-            //{
-            //    // set the parser variables
-            //    parser.TextFieldType = FieldType.Delimited;
-            //    parser.SetDelimiters(",");
-            //}
-            //using(CsvReader csv = new CsvReader(
-            //    new StreamReader(path), true))
-            //{
-            //    csv.ToLookup("ahase");
-            //}
-            //Initialise Powershell
+            
 
             InitialSessionState iss = InitialSessionState.CreateDefault2();
             var shell = PowerShell.Create(iss);
@@ -119,6 +127,9 @@ namespace poshScripts
             {
                 MessageBox.Show(err.Message);
             }
+            //Set Load State
+            userLeftLoaded = true;
+            bothUsersLoaded();
         }
 
         private void reloadUsers(object sender, RoutedEventArgs e)
@@ -169,6 +180,10 @@ namespace poshScripts
             {
                 MessageBox.Show(err.Message);
             }
+            //Set Loaded State
+            userRightLoaded = true;
+            bothUsersLoaded();
+
         }
     }
 }
