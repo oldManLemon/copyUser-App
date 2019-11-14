@@ -60,8 +60,9 @@ namespace poshScripts
             }
             else
             {
-                //TransLR.Visibility = 1;
-                //TransRL.Visibility = 1;
+                //DO TO, As below no work! :(
+                //TransLR.Visibility = Hidden;
+                //TransRL.Visibility(0);
                 //Compare.Visibility = 1;
             }
         }
@@ -93,7 +94,7 @@ namespace poshScripts
 
 
 
-        private void loadLeft_Click(object sender, RoutedEventArgs e)
+        private ItemCollection loadLeft_Click(object sender, RoutedEventArgs e)
         {
 
             var leftUser = UsrLeft.Text;
@@ -130,30 +131,14 @@ namespace poshScripts
             //Set Load State
             userLeftLoaded = true;
             bothUsersLoaded();
+            var leftItems = GroupListLeft.Items;
+
+            return leftItems;
+
         }
 
-        private void reloadUsers(object sender, RoutedEventArgs e)
-        {
-            var script = "C:\\Users\\ahase\\source\\repos\\poshScripts\\scritps\\getUsrLists.ps1";
-            //Initialise Powershell
-            InitialSessionState iss = InitialSessionState.CreateDefault2();
-            var shell = PowerShell.Create(iss);
 
-            shell.Commands.AddCommand(script);
-            shell.Commands.AddArgument(server);
-
-            try
-            {
-                //GroupListLeft
-                var res = shell.Invoke();
-            }
-            catch (Exception Err)
-            {
-                MessageBox.Show(Err.Message);
-            }
-        }
-
-        private void loadRight_Click(object sender, RoutedEventArgs e)
+        private ItemCollection loadRight_Click(object sender, RoutedEventArgs e)
         {
             var rightUser = UsrRight.Text;
             //Initialise Powershell
@@ -183,7 +168,45 @@ namespace poshScripts
             //Set Loaded State
             userRightLoaded = true;
             bothUsersLoaded();
+            var rightItems = GroupListRight.Items;
+            return rightItems;
 
         }
+
+        private void reloadUsers(object sender, RoutedEventArgs e)
+        {
+            var script = "C:\\Users\\ahase\\source\\repos\\poshScripts\\scritps\\getUsrLists.ps1";
+            //Initialise Powershell
+            InitialSessionState iss = InitialSessionState.CreateDefault2();
+            var shell = PowerShell.Create(iss);
+
+            shell.Commands.AddCommand(script);
+            shell.Commands.AddArgument(server);
+
+            try
+            {
+                //GroupListLeft
+                var res = shell.Invoke();
+            }
+            catch (Exception Err)
+            {
+                MessageBox.Show(Err.Message);
+            }
+        }
+
+        private void compare(ItemCollection leftList, ItemCollection rightList)
+        {
+            foreach(string left in leftList)
+            {
+                foreach(string right in rightList)
+                {
+                    if(left == right)
+                    {
+                        //Do stuff
+                    }
+                }
+            }
+        }
+
     }
 }
