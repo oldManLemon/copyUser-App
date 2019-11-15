@@ -38,7 +38,7 @@
                 <ImageBrush ImageSource="img/left-arrow.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
-        <Button x:Name="Compare" Content="Compare" HorizontalAlignment="Left" Margin="411,253,0,0" VerticalAlignment="Top" Width="75" Height="24" Background="#FFFFA000" BorderBrush="{x:Null}" Visibility="Hidden"/>
+        <Button x:Name="Compare" Content="Compare" HorizontalAlignment="Left" Margin="411,253,0,0" VerticalAlignment="Top" Width="75" Height="24" Background="#FFFFA000" BorderBrush="{x:Null}" Visibility="Hidden"  Click="click_compare"/>
 
 
     </Grid>

@@ -39,7 +39,9 @@ namespace poshScripts
 
         bool userLeftLoaded { get; set; }
         bool userRightLoaded { get; set; }
-        
+        ItemCollection rightItems { get; set; }
+        ItemCollection leftItems { get; set; }
+
         public void domain_Check(object sender, RoutedEventArgs e)
         {
             RadioButton check = sender as RadioButton;
@@ -94,16 +96,18 @@ namespace poshScripts
 
 
 
-        private ItemCollection loadLeft_Click(object sender, RoutedEventArgs e)
+        private void loadLeft_Click(object sender, RoutedEventArgs e)
         {
-
+            GroupListLeft.Items.Clear();
             var leftUser = UsrLeft.Text;
             if (leftUser == "")
             {
                 MessageBox.Show("No User Entered");
+                GroupListLeft.Items.Add("");
+                var fail = GroupListLeft.Items;
+
                 return;
             }
-            
 
             InitialSessionState iss = InitialSessionState.CreateDefault2();
             var shell = PowerShell.Create(iss);
@@ -131,16 +135,25 @@ namespace poshScripts
             //Set Load State
             userLeftLoaded = true;
             bothUsersLoaded();
-            var leftItems = GroupListLeft.Items;
+            leftItems = GroupListLeft.Items;
 
-            return leftItems;
+            
 
         }
 
 
-        private ItemCollection loadRight_Click(object sender, RoutedEventArgs e)
+        private void loadRight_Click(object sender, RoutedEventArgs e)
         {
+            GroupListRight.Items.Clear();
             var rightUser = UsrRight.Text;
+            if (rightUser == "")
+            {
+                MessageBox.Show("No User Entered");
+                GroupListLeft.Items.Add("");
+                var fail = GroupListLeft.Items;
+
+                return;
+            }
             //Initialise Powershell
             InitialSessionState iss = InitialSessionState.CreateDefault2();
             var shell = PowerShell.Create(iss);
@@ -168,8 +181,8 @@ namespace poshScripts
             //Set Loaded State
             userRightLoaded = true;
             bothUsersLoaded();
-            var rightItems = GroupListRight.Items;
-            return rightItems;
+            rightItems = GroupListRight.Items;
+            
 
         }
 
@@ -194,17 +207,34 @@ namespace poshScripts
             }
         }
 
-        private void compare(ItemCollection leftList, ItemCollection rightList)
+        private void click_compare(object sender, RoutedEventArgs e)
         {
-            foreach(string left in leftList)
+
+            Console.WriteLine("Click");
+            
+
+            foreach (string left in leftItems)
             {
-                foreach(string right in rightList)
+                foreach (string right in rightItems)
                 {
-                    if(left == right)
+                    if (left == right)
                     {
-                        //Do stuff
+                        //Highlight List Boxes
+                        return Brushes.Red;
+                        
+                      
+                        
+
+
+                    }
+                    else
+                    {
+                        //Just Print them again
+                        GroupListRight.Items.Add(right);
+                        GroupListLeft.Items.Add(left);
                     }
                 }
+
             }
         }
 
