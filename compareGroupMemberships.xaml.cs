@@ -19,6 +19,7 @@ using System.IO;
 using System.Data;
 using Microsoft.VisualBasic.FileIO;
 
+
 namespace poshScripts
 {
     /// <summary>
@@ -98,7 +99,7 @@ namespace poshScripts
 
         private void loadLeft_Click(object sender, RoutedEventArgs e)
         {
-            GroupListLeft.Items.Clear();
+            //GroupListLeft.Items.Clear();
             var leftUser = UsrLeft.Text;
             if (leftUser == "")
             {
@@ -144,7 +145,7 @@ namespace poshScripts
 
         private void loadRight_Click(object sender, RoutedEventArgs e)
         {
-            GroupListRight.Items.Clear();
+            //GroupListRight.Items.Clear();
             var rightUser = UsrRight.Text;
             if (rightUser == "")
             {
@@ -209,34 +210,37 @@ namespace poshScripts
 
         private void click_compare(object sender, RoutedEventArgs e)
         {
-
+            var localRight = rightItems;
+            var localLeft = leftItems;
             Console.WriteLine("Click");
-            
-
-            foreach (string left in leftItems)
+           
+            for(int i=0; i<localLeft.Count; i++)
             {
-                foreach (string right in rightItems)
+                for (int j = 0; j < localRight.Count; j++)
                 {
-                    if (left == right)
+                    if (localLeft[i].ToString() == localRight[j].ToString())
                     {
                         //Highlight List Boxes
-                        return Brushes.Red;
-                        
-                      
-                        
-
-
+                        //GroupListLeft.Items.Add((Colors.Green));
+                        //GroupListRight.Items.Add((Colors.Green));
                     }
-                    else
-                    {
-                        //Just Print them again
-                        GroupListRight.Items.Add(right);
-                        GroupListLeft.Items.Add(left);
-                    }
+                        
                 }
-
             }
+
+        }
+
+        //Stackoverflow
+        public class MyListBoxItem
+        {
+            public MyListBoxItem(Color c, string m)
+            {
+                ItemColor = c;
+                Message = m;
+            }
+            public Color ItemColor { get; set; }
+            public string Message { get; set; }
         }
 
     }
-}
+ }

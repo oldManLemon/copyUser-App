@@ -7,14 +7,34 @@
         xmlns:local="clr-namespace:poshScripts"
         mc:Ignorable="d"
         Title="Compare Group Memberships" Height="650" Width="900">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="ItemCompStyle" TargetType="{x: Type ListViewItem}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="ComparedColour" Color="Aqua">
+                    
+                </SolidColorBrush>
+            </Style.Resources>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ComparedRes}">
+                    <Setter Property="Background" Value="{StaticResource ItemCompStyle}" />
+                </DataTrigger>
+            </Style.Triggers>
+            
+        </Style>
 
+    </Window.Resources>
+
+    <Grid>
         <TextBox x:Name="UsrLeft" HorizontalAlignment="Left" Height="23" Margin="75,55,0,0" TextWrapping="Wrap" Text="{Binding TestText, UpdateSourceTrigger=PropertyChanged}" behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding userNameList}"  VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <TextBox x:Name="UsrRight" HorizontalAlignment="Left" Height="23" Margin="525,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.012,0.661"/>
         <Label Content="Username" HorizontalAlignment="Left" Margin="75,80,0,0" VerticalAlignment="Top"/>
         <Label Content="Username" HorizontalAlignment="Left" Margin="525,80,0,0" VerticalAlignment="Top"/>
-        <ListBox SelectionMode="Multiple" x:Name="GroupListLeft" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300"/>
-        <ListBox x:Name="GroupListRight" HorizontalAlignment="Left" Height="460" Margin="525,121,0,0" VerticalAlignment="Top" Width="300"/>
+        
+        <!--The lists are important-->
+        <ListView  x:Name="GroupListLeft" SelectionMode="Multiple" HorizontalAlignment="Left" Height="460" Margin="75,121,0,0" VerticalAlignment="Top" Width="300" />
+        <ListView x:Name="GroupListRight" SelectionMode="Multiple" HorizontalAlignment="Left" Height="460" Margin="525,121,0,0" VerticalAlignment="Top" Width="300" />
+        
+        
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="460" Margin="400,121,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="TotalLeft" Content="" HorizontalAlignment="Left" Height="28" Margin="75,581,0,0" VerticalAlignment="Top" Width="103"/>
         <Label x:Name="TotalRight" Content="" HorizontalAlignment="Left" Height="28" Margin="525,581,0,0" VerticalAlignment="Top" Width="118"/>
